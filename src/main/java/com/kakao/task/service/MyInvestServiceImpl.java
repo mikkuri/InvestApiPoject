@@ -18,14 +18,12 @@ public class MyInvestServiceImpl implements MyInvestService{
     public List<MyInvestGoods> getMyInvestGoodsInfos(Long userId) {
         List<Invest> myInvestInfo = investService.getMyInvestGoods(userId);
 
-        System.out.println("myInvetInfo:::" + myInvestInfo);
         List<MyInvestGoods> myInvestGoods = myInvestInfo.stream()
                 .map(invest -> {
                     Goods goods = investService.getGoodsById(invest.getGoodsId());
                     return MyInvestGoods.of(invest, goods);
                 })
                 .collect(Collectors.toList());
-        System.out.println("myInvestGoods:::" + myInvestGoods);
 
         return myInvestGoods;
     }
